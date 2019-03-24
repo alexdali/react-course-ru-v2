@@ -1,0 +1,49 @@
+<!DOCTYPE	html>
+<html>
+	<head>
+		<meta	charset="UTF-8"	/>
+		<title>React	[RU]	Tutorial</title>
+		<script	src="https://unpkg.com/react@16/umd/react.development.js"></script>
+		<script	src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+		<!--	Не	используйте	это	в	production	-->
+		<script	src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body>
+		<div	id="root"></div>
+		<script	type="text/babel">
+			
+			const App = () => {
+				return <p>Hello, I am component App</p>
+			}
+
+			const News = () => {
+				return <p>Unfortunatly, news is not yet</p>
+			}
+
+			class BigApp extends React.Component {
+				render() {
+					return (
+						
+						// <div>
+						<React.Fragment>
+							<h1>I component, BigApp</h1>
+							<p className='red'>Components may insert into each other</p>
+							<App />
+							<News />
+						</React.Fragment>
+						// </div>
+						
+					)
+				}
+			}
+						
+		      ReactDOM.render(
+		        <BigApp />,
+		        document.getElementById('root')
+		      );
+			
+		</script>
+		
+	</body>
+</html>
