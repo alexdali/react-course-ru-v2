@@ -13,33 +13,82 @@
 		<div	id="root"></div>
 		<script	type="text/babel">
 			
-			const App = () => {
-				return <p>Hello, I am component App</p>
-			}
+			const myNews = [
+				{
+					id: 1,
+					author: 'Саша Печкин',
+					text: 'В четверг, четвертого числа...'
+				},
+				{
+					id: 2,
+					author: 'Просто Вася',
+					text: 'Считаю, что $ должен стоить 35 рублей!'
+				},
+				{
+					id: 3,
+					author: 'Max Frontend',
+					text: 'Прошло 2 года с прошлых учебников, а $ так и не стоит 35'
+				},
+				{
+					id: 4,
+					author: 'Гость',
+					text: 'Бесплатно. Без смс, про реакт, заходи - https://maxpfrontend.ru'
+				}
+			];
 
-			const News = () => {
-				return <p>Unfortunatly, news is not yet</p>
-			}
-
-			class BigApp extends React.Component {
+			class News extends React.Component {
 				render() {
+					const newsTemplate = this.props.data.map(function(item) {
+						return (
+							<div key={item.id}>
+								<p className="news_author">{item.author}:</p>
+								<p className="news_text">{item.text}</p>
+							</div>
+						)	
+					});
+
+					console.log(newsTemplate);
+
 					return (
-						
-						// <div>
-						<React.Fragment>
-							<h1>I component, BigApp</h1>
-							<p className='red'>Components may insert into each other</p>
-							<App />
-							<News />
-						</React.Fragment>
-						// </div>
-						
+						<div className="news">
+							{newsTemplate}	
+						</div>
 					)
 				}
 			}
+
+			const Comments = () => {
+				return <p>No news - no comments</p>
+			}
+			
+			const App = () => {
+				return (
+					<React.Fragment>
+						<News data={myNews}/> {/* добавили свойство data */}
+						<Comments />
+					</React.Fragment>
+				)
+			}
+
+			// class BigApp extends React.Component {
+			// 	render() {
+			// 		return (
+						
+			// 			// <div>
+			// 			<React.Fragment>
+			// 				<h1>I component, BigApp</h1>
+			// 				<p className='red'>Components may insert into each other</p>
+			// 				<App />
+			// 				<News />
+			// 			</React.Fragment>
+			// 			// </div>
+						
+			// 		)
+			// 	}
+			// }
 						
 		      ReactDOM.render(
-		        <BigApp />,
+		        <App />,
 		        document.getElementById('root')
 		      );
 			
