@@ -38,22 +38,32 @@
 
 			class News extends React.Component {
 				render() {
-					const newsTemplate = this.props.data.map(function(item) {
-						return (
-							<div key={item.id}>
-								<p className="news_author">{item.author}:</p>
-								<p className="news_text">{item.text}</p>
-							</div>
-						)	
-					});
+					const { data } = this.props;
+					let newsTemplate;
 
-					console.log(newsTemplate);
+					if (data.length) {
+						newsTemplate = data.map(function(item) {
+							return (
+								<div key={item.id}>
+									<p className="news_author">{item.author}:</p>
+									<p className="news_text">{item.text}</p>
+								</div>
+							);
+						});
+					} else {
+						newsTemplate = <p>Unfortunatly, news is not yet</p>
+					}
+					
+					// console.log(newsTemplate);
 
 					return (
 						<div className="news">
-							{newsTemplate}	
+							{newsTemplate}
+							{
+								data.length ? <strong>Всего новостей: {data.length}</strong> : null
+							}
 						</div>
-					)
+					);
 				}
 			}
 
