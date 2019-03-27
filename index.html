@@ -12,7 +12,7 @@
 	<body>
 		<div	id="root"></div>
 		<script	type="text/babel">
-			
+
 			const myNews = [
 				{
 					id: 1,
@@ -36,24 +36,32 @@
 				}
 			];
 
+			class Article extends React.Component {
+				render() {
+					const { author, text } = this.props.data;
+					return (
+						<div className="article">
+							<p className="news_author">{author}:</p>
+							<p className="news_text">{text}</p>
+						</div>
+					);
+				}
+
+			}
+
 			class News extends React.Component {
 				render() {
 					const { data } = this.props;
-					let newsTemplate;
+					// let newsTemplate;
 
 					if (data.length) {
 						newsTemplate = data.map(function(item) {
-							return (
-								<div key={item.id}>
-									<p className="news_author">{item.author}:</p>
-									<p className="news_text">{item.text}</p>
-								</div>
-							);
+							return <Article key={item.id} data={item}/>;
 						});
 					} else {
 						newsTemplate = <p>Unfortunatly, news is not yet</p>
 					}
-					
+
 					// console.log(newsTemplate);
 
 					return (
@@ -67,15 +75,10 @@
 				}
 			}
 
-			const Comments = () => {
-				return <p>No news - no comments</p>
-			}
-			
 			const App = () => {
 				return (
 					<React.Fragment>
 						<News data={myNews}/> {/* добавили свойство data */}
-						<Comments />
 					</React.Fragment>
 				)
 			}
@@ -83,7 +86,7 @@
 			// class BigApp extends React.Component {
 			// 	render() {
 			// 		return (
-						
+
 			// 			// <div>
 			// 			<React.Fragment>
 			// 				<h1>I component, BigApp</h1>
@@ -92,17 +95,17 @@
 			// 				<News />
 			// 			</React.Fragment>
 			// 			// </div>
-						
+
 			// 		)
 			// 	}
 			// }
-						
+
 		      ReactDOM.render(
 		        <App />,
 		        document.getElementById('root')
 		      );
-			
+
 		</script>
-		
+
 	</body>
 </html>
